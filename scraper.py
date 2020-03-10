@@ -3,7 +3,7 @@ import requests
 
 search = input("Enter search keyword: ")
 params = {"q": search}
-r = requests.get("https://www.bing.com/search", params = params)
+r = requests.get("https://www.bing.com/search", params=params)
 soup = BeautifulSoup(r.text, "html.parser")
 results = soup.find("ol", {"id": "b_results"})
 links = results.findAll("li", {"class": "b_algo"})
@@ -15,3 +15,4 @@ for item in links:
     if item_text and item_href:
         print(item_text)
         print(item_href)
+        print("summary: ", item.find("a").parent.parent.find("p").text)
